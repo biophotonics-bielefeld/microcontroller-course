@@ -13,8 +13,8 @@ Looks for a serial port with an Ardunio Uno R4 connected
 def open_unoR4_port() -> serial.Serial:
     ports = serial.tools.list_ports.comports()  # gets a list of all serial ports in the system
     for port, desc, hwid in ports:              
-        print ("#", port, desc)
-        if 'UNO R4' in desc:                    # The Arduino ports say that they are Arduinos in their description
+        print ("#", port, desc, hwid)
+        if 'UNO R4' in desc or 'VID:PID=2341:0069' in hwid:      # 'UNO R4' only works on Linux, search by HWID on Windows
             print('# Arduino found on port', port)
             ser = None
             try: 
